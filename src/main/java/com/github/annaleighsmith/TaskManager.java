@@ -1,6 +1,5 @@
 package com.github.annaleighsmith;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,23 +24,23 @@ import java.util.List;
             saveChangesToFile();
         }
 
-        public void updateTask(int taskId, Task updatedTask) {
+        public boolean updateTask(int taskId, Task updatedTask) {
             if (isValidTaskId(taskId)) {
                 tasks.set(taskId, updatedTask);
-                System.out.println("Task updated successfully");
                 saveChangesToFile();
+                return true;
             } else {
-                System.out.println("Invalid Task ID.");
+                return false;
             }
         }
 
-        public void deleteTask(int taskId) {
+        public boolean deleteTask(int taskId) {
             if (isValidTaskId(taskId)) {
                 tasks.remove(taskId);
-                System.out.println("Task deleted successfully.");
                 saveChangesToFile(); // Save tasks to file after deleting the task
+                return true;
             } else {
-                System.out.println("Invalid task ID.");
+                return false;
             }
         }
 

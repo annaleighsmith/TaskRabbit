@@ -53,25 +53,37 @@ public class Main{
 
                     // Update the task
                     Task updatedTask = new Task(updatedTitle, updatedDescription);
-                    taskManager.updateTask(taskIdToUpdate, updatedTask);
+                    if (taskManager.updateTask(taskIdToUpdate, updatedTask)){
+                        System.out.println("Task updated successfully");
+                    }
+                    else {
+                        System.out.println("Error updating task");
+                    }
                     break;
                 case 3:
                     // Delete Task
-                    System.out.print("Enter task id you would like to delete: ");
-                    String taskIdStr = scanner.nextLine().trim();
-                    try {
-                        int taskId = Integer.parseInt(taskIdStr);
-                        taskManager.deleteTask(taskId);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid task ID. Please enter a valid integer.");
+                    while (true) {
+                        System.out.print("Enter task id you would like to delete or enter 0 to exit: ");
+                        String taskIdStr = scanner.nextLine().trim();
+                        if (taskIdStr.equals("0")) {
+                            break;
+                        }
+                        try {
+                            int taskId = Integer.parseInt(taskIdStr);
+                            if (taskManager.deleteTask(taskId)) {
+                                System.out.println("Task deleted successfully.");
+                            } else {
+                                System.out.println("Task ID not found. Please enter a valid task ID");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid task ID. Please enter a valid integer.");
+                        }
                     }
                     break;
                 case 4:
-                    // View All Tasks
                     taskManager.viewAllTasks();
                     break;
                 case 0:
-                    // Exit TaskManagerApp
                     System.out.println("Exiting Task Manager. Goodbye!");
                     break;
                 default:

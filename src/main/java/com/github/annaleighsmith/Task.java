@@ -7,7 +7,6 @@ public class Task {
 
     // Default constructor
     public Task() {
-        // Default values
         this.title = "";
         this.description = "";
         this.completed = false;
